@@ -16,5 +16,5 @@ interface DaoShopping {
     suspend fun deleteShoppingItems(shoppingItems: ShoppingItems)
 
     @Query("select sum(prise * amount) from shopping_items")
-    fun readTotalPrise() : LiveData<List<ShoppingItems>>
+    fun readTotalPrise() : LiveData<Float>
 }
