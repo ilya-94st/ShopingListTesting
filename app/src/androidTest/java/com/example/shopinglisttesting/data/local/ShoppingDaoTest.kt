@@ -1,12 +1,15 @@
 package com.example.shopinglisttesting.data.local
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.navigation.Navigator
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.example.shopinglisttesting.getOrAwaitValue
 import com.google.common.truth.Truth.assertThat
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -14,23 +17,33 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import javax.inject.Inject
+import javax.inject.Named
 
 @ExperimentalCoroutinesApi
-@RunWith(AndroidJUnit4::class) // благодаря этой анатации наши тесты будут запускаться на эмуляторе
+@HiltAndroidTest
 @SmallTest // определение нагрузки тестов
 class ShoppingDaoTest {
-    private lateinit var shoppingDatabase: ShoppingDatabase
+
+
+
+    @Inject
+    // необходим нейминг для того чтобы хилт распознал какую внедрять базу данных
+    @Named("test_db")
+    lateinit var shoppingDatabase: ShoppingDatabase
     private lateinit var daoShopping: DaoShopping
+
+    // пишем правило для хилтеста
+    @get:Rule
+    var hiltAndroidTest = HiltAndroidRule(this)
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule() // это правило нужно чтобы наше jvm не выдовал ошибкт из-за livedata
 
     @Before
     fun setup() {
-        shoppingDatabase = Room.inMemoryDatabaseBuilder( // inMemoryDatabaseBuilder будем хранить нашу базу в оперативной памяти а не в хронилище, не ностоящая база данных
-            ApplicationProvider.getApplicationContext(),
-            ShoppingDatabase::class.java
-        ).allowMainThreadQueries().build()
+        // внедряем нашу тестовую базу
+         hiltAndroidTest.inject()
         daoShopping = shoppingDatabase.getDaoShopping()
     }
 
