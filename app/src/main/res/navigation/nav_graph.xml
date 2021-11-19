@@ -15,4 +15,9 @@
         android:name="com.example.shopinglisttesting.ui.fragments.ImageFragment"
         android:label="fragment_image"
         tools:layout="@layout/fragment_image" />
+    <fragment
+        android:id="@+id/addShoppingItemsFragment"
+        android:name="com.example.shopinglisttesting.ui.fragments.AddShoppingItemsFragment"
+        android:label="fragment_add_shopping_items"
+        tools:layout="@layout/fragment_add_shopping_items" />
 </navigation>

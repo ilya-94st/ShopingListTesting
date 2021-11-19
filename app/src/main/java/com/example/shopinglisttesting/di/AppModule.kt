@@ -3,9 +3,12 @@ package com.example.shopinglisttesting.di
 import android.content.Context
 import androidx.room.Room
 import com.example.shopinglisttesting.api.PixAbayApi
+import com.example.shopinglisttesting.data.local.DaoShopping
 import com.example.shopinglisttesting.data.local.ShoppingDatabase
 import com.example.shopinglisttesting.other.Constants
 import com.example.shopinglisttesting.other.Constants.DB_NAME
+import com.example.shopinglisttesting.repository.DefaultRepository
+import com.example.shopinglisttesting.repository.ShoppingRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,4 +41,7 @@ object AppModule {
     @Singleton
     fun getRunningDao(db: ShoppingDatabase) = db.getDaoShopping()
 
+    @Provides
+    @Singleton
+    fun provideDefaultShoppingRepositories(daoShopping: DaoShopping, api: PixAbayApi,): ShoppingRepository = DefaultRepository(daoShopping, api)
 }

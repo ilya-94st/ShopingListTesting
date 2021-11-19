@@ -7,7 +7,7 @@ import com.example.shopinglisttesting.data.local.ShoppingItems
 import com.example.shopinglisttesting.other.Resources
 import com.example.shopinglisttesting.repository.ShoppingRepository
 
-class FaceShoppingRepository: ShoppingRepository {
+class FakeShoppingRepository: ShoppingRepository {
 
     private val shoppingItemsFake = mutableListOf<ShoppingItems>()
 
