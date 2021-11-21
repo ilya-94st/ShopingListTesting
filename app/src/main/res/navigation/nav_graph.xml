@@ -9,7 +9,11 @@
         android:id="@+id/frragmentShoping"
         android:name="com.example.shopinglisttesting.ui.fragments.FragmentShopping"
         android:label="fragment_frragment_shoping"
-        tools:layout="@layout/fragment_shoping" />
+        tools:layout="@layout/fragment_shoping" >
+        <action
+            android:id="@+id/action_frragmentShoping_to_addShoppingItemsFragment"
+            app:destination="@id/addShoppingItemsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/imageFragment"
         android:name="com.example.shopinglisttesting.ui.fragments.ImageFragment"
@@ -19,5 +23,9 @@
         android:id="@+id/addShoppingItemsFragment"
         android:name="com.example.shopinglisttesting.ui.fragments.AddShoppingItemsFragment"
         android:label="fragment_add_shopping_items"
-        tools:layout="@layout/fragment_add_shopping_items" />
+        tools:layout="@layout/fragment_add_shopping_items" >
+        <action
+            android:id="@+id/action_addShoppingItemsFragment_to_imageFragment"
+            app:destination="@id/imageFragment" />
+    </fragment>
 </navigation>
