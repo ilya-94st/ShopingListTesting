@@ -7,4 +7,6 @@ object Constants {
 
    const val MAX_LENGTH_NAME = 20
    const val MAX_LENGTH_PRICE = 10
+
+   const val GRID_SPAN_COUNT = 4
 }

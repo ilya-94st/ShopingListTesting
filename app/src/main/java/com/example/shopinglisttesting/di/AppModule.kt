@@ -2,6 +2,10 @@ package com.example.shopinglisttesting.di
 
 import android.content.Context
 import androidx.room.Room
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.example.shopinglisttesting.R
 import com.example.shopinglisttesting.api.PixAbayApi
 import com.example.shopinglisttesting.data.local.DaoShopping
 import com.example.shopinglisttesting.data.local.ShoppingDatabase
@@ -30,6 +34,16 @@ object AppModule {
         .build()
         .create(PixAbayApi::class.java)
 
+    @Provides
+    @Singleton
+    fun provideGlideInstance(
+        @ApplicationContext app: Context
+    ) = Glide.with(app).setDefaultRequestOptions(
+        RequestOptions()
+            .placeholder(R.drawable.cat)
+            .error(R.drawable.ic_baseline_error_24)
+            .diskCacheStrategy(DiskCacheStrategy.DATA) // наше изображение кэшируется при помощи Glide
+    )
 
     @Provides
     @Singleton
