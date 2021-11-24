@@ -15,9 +15,10 @@ import com.example.shopinglisttesting.adapters.ShoppingAdapter
 import com.example.shopinglisttesting.base.BaseFragment
 import com.example.shopinglisttesting.databinding.FragmentShopingBinding
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class FragmentShopping @Inject constructor(val shoppingAdapter: ShoppingAdapter, var viewModel: ShoppingViewModel? = null): BaseFragment<FragmentShopingBinding>() {
 
     override fun getFragmentBinding(

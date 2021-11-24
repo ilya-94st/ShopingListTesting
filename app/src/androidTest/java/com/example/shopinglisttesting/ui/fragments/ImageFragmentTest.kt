@@ -46,15 +46,16 @@ class ImageFragmentTest {
     @Test
     fun clickImage_popBackStackAddImageUrl() {
         val imageTest = "ImageTest"
-        val testViewModel = ShoppingViewModel(FakeShoppingRepositoryAndroidTest())
+        val testViewModel = ShoppingViewModel(FakeShoppingRepositoryAndroidTest()) // Надо перкинуть из папки test  в папку androidTest FakeRepository
         val navController = mock(NavController::class.java)
         launchFragmentInHiltContainer<ImageFragment>(fragmentFactory = factory) {
             Navigation.setViewNavController(requireView(), navController)
-            imageAdapter.images = listOf(imageTest)
-            viewModel = testViewModel
+            imageAdapter.images = listOf(imageTest) // Типо заполняем наш RecyclerView
+            viewModel = testViewModel // присваеваем viewModel testViewModel
             // adb shell settings put global animator_duration_scale 0 чтобы отключить анимацию иначе наш тест сработает не корректно
         }
 
+        // Клик по элементу в recyclerView
         onView(withId(R.id.rvImages)).perform(
             RecyclerViewActions.actionOnItemAtPosition<ImageAdapter.ImageViewHolder>(
                 0,
@@ -63,6 +64,6 @@ class ImageFragmentTest {
         )
 
         verify(navController).popBackStack()
-        assertThat(testViewModel.imagesUrl().getOrAwaitValue()).isEqualTo(imageTest)
+        assertThat(testViewModel.imagesUrl().getOrAwaitValue()).isEqualTo(imageTest) // делаем проверку содержиться ли в testViewModel imageTest
     }
 }

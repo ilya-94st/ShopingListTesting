@@ -55,18 +55,11 @@ class ShoppingDaoTest {
     }
 
     @Test
-    fun testLaunchFragmentInHiltContainer() {
-            launchFragmentInHiltContainer<FragmentShopping> {
-
-            }
-    }
-
-    @Test
     fun insertShopping() = runBlockingTest {
         val shoppingItems = ShoppingItems("banana", 1, 1f, "url", 1) // создаем фейковую базу данных
         daoShopping.insert(shoppingItems) // помещаем ее
 
-        val allShoppingItems = daoShopping.readAll().getOrAwaitValue() // считываем базу данных
+        val allShoppingItems = daoShopping.readAll().getOrAwaitValue() // считываем базу данных/ getOrAwaitValue() нужен чтобы возращал список данных а не живые данные
         assertThat(allShoppingItems).contains(shoppingItems) // проверка содержит ли наш allShoppingItems shoppingItems
     }
 

@@ -15,8 +15,10 @@ import com.example.shopinglisttesting.R
 import com.example.shopinglisttesting.base.BaseFragment
 import com.example.shopinglisttesting.databinding.FragmentAddShoppingItemsBinding
 import com.example.shopinglisttesting.other.Resources
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class AddShoppingItemsFragment @Inject constructor(val glide: RequestManager) : BaseFragment<FragmentAddShoppingItemsBinding>() {
     lateinit var viewModel: ShoppingViewModel
 
