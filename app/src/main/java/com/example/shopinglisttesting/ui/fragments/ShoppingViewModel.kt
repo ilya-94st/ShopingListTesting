@@ -29,14 +29,14 @@ class ShoppingViewModel @Inject constructor(val shoppingRepository: ShoppingRepo
         return _imagesUrl
     }
 
+    fun setImagesUrl(url: String) {
+        _imagesUrl.postValue(url)
+    }
+
     private val _insertShoppingStatus: MutableLiveData<Event<Resources<ShoppingItems>>> = MutableLiveData()
 
     fun insertShoppingStatus(): LiveData<Event<Resources<ShoppingItems>>> {
         return _insertShoppingStatus
-    }
-
-    fun setImagesUrl(url: String) {
-        _imagesUrl.postValue(url)
     }
 
     fun deleteShoppingItems(shoppingItems: ShoppingItems) = viewModelScope.launch {
@@ -80,10 +80,8 @@ class ShoppingViewModel @Inject constructor(val shoppingRepository: ShoppingRepo
         _insertShoppingStatus.postValue(Event(Resources.successes(shoppingItems)))
     }
 
-    fun searchImagesPix(imageQuery: String) {
-      if (imageQuery.isEmpty()){
-          return
-      }
+    fun searchImagesPix(imageQuery: String) = viewModelScope.launch {
+
         _imagesPix.value = Event(Resources.landing(null))
         viewModelScope.launch {
             val response = shoppingRepository.searchPixImage(imageQuery)

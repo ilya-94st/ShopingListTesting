@@ -66,12 +66,12 @@ class FragmentShoppingTest {
 
     @Test
     fun clickAddShoppingItemButton_navigateToAddShoppingItemFragment() {
-        val navController = mock(NavController::class.java)
-        launchFragmentInHiltContainer<FragmentShopping> {
+        val navController = mock(NavController::class.java) // mock макет навигации
+        launchFragmentInHiltContainer<FragmentShopping> { //В дженериках указываем Фрагмент который мы будем тестировать. Функция для тестирования фрагментов котрая запускает активти и потом фрагмент
             Navigation.setViewNavController(requireView(), navController)
         }
-        onView(withId(R.id.fabAddShoppingItem)).perform(click())
+        onView(withId(R.id.fabAddShoppingItem)).perform(click()) // находим нашу кнопку и делаем по ней клик
 
-        verify(navController).navigate(R.id.action_frragmentShoping_to_addShoppingItemsFragment)
+        verify(navController).navigate(R.id.action_frragmentShoping_to_addShoppingItemsFragment) // убеждаемся что наш navController был вызван // функция проверка
     }
 }

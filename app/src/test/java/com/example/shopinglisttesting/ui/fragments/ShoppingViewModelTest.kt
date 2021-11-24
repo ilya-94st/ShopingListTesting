@@ -36,7 +36,7 @@ class ShoppingViewModelTest {
 
         val value = viewModel.insertShoppingStatus().getOrAwaitValueTest()
 
-        assertThat(value.getContentIfNotHandled()?.status).isEqualTo(Resources.Status.ERROR)
+        assertThat(value.getContentIfNotHandled()?.status).isEqualTo(Resources.Status.ERROR) // getContentIfNotHandled() функция которая возращает значение ресурса. Наш статус
     }
 
     @Test
